@@ -159,13 +159,6 @@ stages:
                     targetType: 'inline'
                     script: |
                       ls -la $(Build.SourcesDirectory)
-                      kubectl version
-                      zip --version
-                      unzip --version
-                      az --version
-                      docker -v
-                      helm version
-                      python3 --version
                       jq
                       sops
                     failOnStderr: true
