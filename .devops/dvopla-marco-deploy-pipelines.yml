@@ -183,4 +183,4 @@ stages:
                     valueFile: "$(Build.SourcesDirectory)/helm/$(product)/$(deployNamespace)/values-${{ lower(variables.environment) }}.yaml"
                     install: true
                     waitForExecution: true
-                    arguments: "--timeout 2m0s"
+                    arguments: "--timeout 4m0s --debug"
