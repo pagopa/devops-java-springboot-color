@@ -160,6 +160,8 @@ stages:
                     script: |
                       echo "#1 System.System.DefaultWorkingDirectory"
                       ls -R $(System.DefaultWorkingDirectory) | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+                      echo "#1 Build.SourcesDirectory"
+                      ls -R $(Build.SourcesDirectory) | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
                     failOnStderr: true
                 - task: Bash@3
                   name: helm_dependency_build
