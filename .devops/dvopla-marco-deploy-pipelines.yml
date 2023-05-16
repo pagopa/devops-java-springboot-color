@@ -158,7 +158,6 @@ stages:
                   inputs:
                     targetType: 'inline'
                     script: |
-#                      ls -la $(Pipeline.Workspace)/helm/$(product)/$(deployNamespace)
                       ls -la $(Pipeline.Workspace)/helm
                     failOnStderr: true
                 - task: Bash@3
