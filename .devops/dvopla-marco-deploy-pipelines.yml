@@ -158,7 +158,7 @@ stages:
                   inputs:
                     targetType: 'inline'
                     script: |
-                      ls -la $(Pipeline.Workspace)/helm
+                      ls -la $(Pipeline.Workspace)
                     failOnStderr: true
                 - task: Bash@3
                   name: helm_dependency_build
