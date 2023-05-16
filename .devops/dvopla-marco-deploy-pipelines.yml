@@ -145,7 +145,7 @@ stages:
           runOnce:
             deploy:
               steps:
-                - download: none
+                - checkout: self
 #                - task: DownloadPipelineArtifact@2
 #                  inputs:
 #                    buildType: 'current'
@@ -158,14 +158,8 @@ stages:
                   inputs:
                     targetType: 'inline'
                     script: |
-                      echo "#1 pipeline workspace"
-                      ls -R $(Pipeline.Workspace) | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-                      echo "#2 repo local path"
-                      ls -R $(Build.Repository.LocalPath) | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-                      echo "#3 agent workfolder"
-                      ls -R $(Agent.WorkFolder) | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-                      echo "#4 build sourcedir"
-                      ls -R $(Build.SourcesDirectory) | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+                      echo "#1 System.System.DefaultWorkingDirectory"
+                      ls -R $(System.DefaultWorkingDirectory) | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
                     failOnStderr: true
                 - task: Bash@3
                   name: helm_dependency_build
@@ -184,7 +178,7 @@ stages:
                     namespace: '$(deployNamespace)'
                     command: upgrade
                     chartType: filepath
-                    chartPath: $(Pipeline.Workspace)/helm/$(product)/$(deployNamespace)
+                    chartPath: $(System.DefaultWorkingDirectory)/helm/$(product)/$(deployNamespace)
                     chartName: "Chart.yaml"
                     releaseName: ${{ variables.imageRepository }}
                     valueFile: "$(Pipeline.Workspace)/helm/$(product)/$(deployNamespace)/values-${{ lower(variables.environment) }}.yaml"
