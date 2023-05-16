@@ -158,7 +158,7 @@ stages:
                   inputs:
                     targetType: 'inline'
                     script: |
-                      ls -la $(Agent.WorkFolder)
+                      ls -la $(Build.Repository.LocalPath)
                     failOnStderr: true
                 - task: Bash@3
                   name: helm_dependency_build
