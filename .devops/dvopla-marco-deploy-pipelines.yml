@@ -159,7 +159,6 @@ stages:
                     targetType: 'inline'
                     script: |
                       ls -la $(Build.SourcesDirectory)
-                      jq
                       sops
                     failOnStderr: true
                 - task: Bash@3
