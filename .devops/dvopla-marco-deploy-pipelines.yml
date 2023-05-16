@@ -158,10 +158,7 @@ stages:
                   inputs:
                     targetType: 'inline'
                     script: |
-                      echo "#1 System.System.DefaultWorkingDirectory"
-                      ls -R $(System.DefaultWorkingDirectory) | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-                      echo "#1 Build.SourcesDirectory"
-                      ls -R $(Build.SourcesDirectory) | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+                      ls -la $(Build.SourcesDirectory)
                     failOnStderr: true
                 - task: Bash@3
                   name: helm_dependency_build
@@ -180,7 +177,7 @@ stages:
                     namespace: '$(deployNamespace)'
                     command: upgrade
                     chartType: filepath
-                    chartPath: $(System.DefaultWorkingDirectory)/helm/$(product)/$(deployNamespace)
+                    chartPath: $(Build.SourcesDirectory)/helm/$(product)/$(deployNamespace)
                     chartName: "Chart.yaml"
                     releaseName: ${{ variables.imageRepository }}
                     valueFile: "$(Pipeline.Workspace)/helm/$(product)/$(deployNamespace)/values-${{ lower(variables.environment) }}.yaml"
