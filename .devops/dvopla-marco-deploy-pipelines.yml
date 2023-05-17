@@ -159,7 +159,6 @@ stages:
                     targetType: 'inline'
                     script: |
                       ls -la $(Build.SourcesDirectory)
-                      sops
                     failOnStderr: true
                 - task: Bash@3
                   name: helm_dependency_build
