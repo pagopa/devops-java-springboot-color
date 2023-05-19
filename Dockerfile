@@ -17,6 +17,7 @@ VOLUME /tmp
 WORKDIR /app
 
 RUN mkdir -p /app/logs
+RUN chmod +w -R /app/logs
 
 COPY --from=buildtime /build/target/*.jar /app/app.jar
 # The agent is enabled at runtime via JAVA_TOOL_OPTIONS.
