@@ -20,7 +20,7 @@ microservice-chart:
       create: true
       image:
         repository: ghcr.io/pagopa/devops-java-springboot-color
-        tag: sha-1009ce1
+        tag: sha-f192475
         pullPolicy: Always
       envConfig:
         MY_APP_COLOR: "blue"
@@ -41,7 +41,7 @@ microservice-chart:
 
   image:
     repository: ghcr.io/pagopa/devops-java-springboot-color
-    tag: 0.8.1
+    tag: sha-f192475
     pullPolicy: Always
 
   livenessProbe:
