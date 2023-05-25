@@ -4,6 +4,7 @@
 
 target/
 helm/charts
+helm/**/charts
 logs/
 
 # Compiled class file
@@ -32,3 +33,5 @@ hs_err_pid*
 
 # IntelliJ files
 .idea
+# Mac files
+.DS_Store
