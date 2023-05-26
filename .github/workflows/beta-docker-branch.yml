@@ -41,7 +41,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:beta-${{ github.ref_name }}
+            ghcr.io/${{ github.repository }}:beta-${{ github.ref_name//\//- }}
           labels: |
             maintainer=https://pagopa.it
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
