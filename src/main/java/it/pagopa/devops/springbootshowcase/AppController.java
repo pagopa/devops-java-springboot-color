@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/app")
 public class AppController {
-
     @Value("${MY_APP_COLOR:}")
     private String myAppColor;
 
