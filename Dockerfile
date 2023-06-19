@@ -16,9 +16,6 @@ FROM adoptopenjdk/openjdk11:alpine-jre as runtime
 VOLUME /tmp
 WORKDIR /app
 
-RUN mkdir -p /app/logs/archived
-RUN chmod -R 777 /app/logs
-RUN touch /app/logs/spring-boot-logger.log
 
 COPY --from=buildtime /build/target/*.jar /app/app.jar
 # The agent is enabled at runtime via JAVA_TOOL_OPTIONS.
