@@ -1,0 +1,206 @@
+# -- Namespace in which deploy the microservice
+namespace: ""
+# -- Helm chart name override
+nameOverride: ""
+# -- Helm chart fullname override
+fullnameOverride: ""
+terminationGracePeriodSeconds: 30
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 0
+    maxSurge: 1
+image:
+  # -- Docker reposity for the container
+  repository: ""
+  # -- Container TAG
+  tag: "v0.0.0"
+  # -- Pull policy to use
+  pullPolicy: Always
+
+# -- Sidecars, each object has exactly the same schema as a Pod, except it does not have an apiVersion or kind
+sidecars: []
+
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8558
+  initialDelaySeconds: 10
+  failureThreshold: 10
+  periodSeconds: 5
+livenessProbe:
+  httpGet:
+    path: /alive
+    port: 8558
+  initialDelaySeconds: 15
+  failureThreshold: 10
+  periodSeconds: 5
+
+
+# -- Configure values from config maps external to chart. E.g already present into cluster, see documentation
+# @default -- {}
+externalConfigMap:
+  create: false
+  configMaps: []
+
+# -- Configure mounted volumes with secrets needed to mount them
+# @default -- {}
+providedVolumeMount:
+  create: false
+  envSecrets: {}
+  folders: []
+# -- Configure optional tmp volume to mount
+tmpVolumeMount:
+  create: false
+  name: tmp
+  mountPath: /tmp
+
+# -- POD resources section
+# @default -- -
+resources:
+  # -- request is mandatory
+  requests:
+    memory: "96Mi"
+    cpu: "40m"
+  # -- limits is mandatory
+  limits:
+    memory: "128Mi"
+    cpu: "150m"
+
+# -- Environment config to use for the canary container
+envConfig: {}
+
+# -- Configure secret provider with secrets to mount as environment variables
+secretProvider:
+  create: false
+  envSecrets: {}
+  keyvault:
+    name: ""
+    tenantId: ""
+
+# -- Environment config from k8s metadata
+envFieldRef: {}
+
+# -- Configure files to mount as config maps
+configMapFromFile: {}
+
+podAnnotations: {}
+
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - all
+
+# -- K8s node selectors
+nodeSelector: {}
+
+# -- Pod taints toleration
+tolerations: []
+
+# -- Pod labels affinity
+affinity: {}
+
+restartPolicy: "Always"
+
+#
+# Autoscaling
+#
+# -- Autoscaling using KEDA
+# @default -- -
+autoscaling:
+  # -- Enable Autoscaling
+  enable: false
+  # -- Autoscaling minimum replicas
+  minReplica: 1
+  # -- Autoscaling maximum replicas
+  maxReplica: 1
+  # -- Autoscaling event polling intervall
+  pollingInterval: 10 # seconds
+  # -- Autoscaling cooldown period
+  cooldownPeriod: 300 # seconds
+  # -- Autoscaling triggers as per [Keda scalers](https://keda.sh/docs/2.6/scalers/)
+  triggers: []
+  # -- Autoscaling advanced https://keda.sh/docs/2.9/concepts/scaling-deployments/#advanced
+  advanced: {}
+  #- advanced:
+  #-  restoreToOriginalReplicaCount: false # Optional. Default: false
+  #-  horizontalPodAutoscalerConfig:
+  #-    behavior:
+  #-      scaleDown:
+  #-        stabilizationWindowSeconds: 300
+  #-        policies:
+  #-        - type: Percent
+  #-          value: 100
+  #-          periodSeconds: 15
+
+#
+# Pod identity and KV connection
+#
+
+serviceAccount:
+  create: false
+  annotations: {}
+  name: ""
+
+serviceMonitor:
+  # -- (bool) Create or not the service monitor
+  create: false
+  endpoints: []
+
+# -- Configure deployment
+# @default -- -
+replicas: 1
+# -- (bool) Force redeploy container
+forceRedeploy: false
+ports:
+  - 8080
+
+service:
+  # -- (bool) create the service manifest
+  create: true
+  # -- Which type of service to use
+  type: ClusterIP
+  # -- (list) Which ports use (! this port is used even inside the deployment)
+  ports:
+    - 8080
+
+# -- Ingress configuration
+# @default -- -
+ingress:
+  # -- (bool) Create or not the ingress manifest
+  create: false
+  # -- Hostname for the ingress like https://idpay.pagopa.it
+  host: ""
+  # -- (int) service port to reach
+  servicePort: 8080
+  # -- Path where the application can response like: `/app`
+  path: "/app(/|$)(.*)"
+  pathType: Prefix
+  # -- (bool) if force ssl redirect is enabled
+  forceSslRedirect: true
+  # -- the rewrite target for ingress
+  rewriteTarget: /$2
+  # -- the size allowed by nginx.ingress.kubernetes.io/proxy-body-size for client request body
+  proxyBodySize: 1m
+  # -- (map) custom annotations for ingress
+  annotations: {}
+
+
+# -- This section allow to configure canary deployment
+# @default -- -
+canaryDelivery:
+  # -- (bool) Beta/Enable Canary/BlueGreen Deployment
+  create: false
+  # -- This section allow to configure ingress inside canary deployment
+  # @default -- -
+  ingress:
+    header: true
+    bluegreen: false
+    headerName: X-Canary
+    headerValue: pagopa
