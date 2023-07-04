@@ -16,6 +16,9 @@ FROM amazoncorretto:17.0.6-al2@sha256:86ad3a5620d6f7590f59fb6067b98687367e49e632
 VOLUME /tmp
 WORKDIR /app
 
+RUN mkdir /app/logs
+RUN chown spring:spring /app/logs
+
 COPY --from=buildtime /build/target/*.jar /app/app.jar
 # The agent is enabled at runtime via JAVA_TOOL_OPTIONS.
 ADD https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.2.7/applicationinsights-agent-3.2.7.jar /app/applicationinsights-agent.jar
