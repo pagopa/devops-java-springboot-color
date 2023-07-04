@@ -5,7 +5,7 @@ microservice-chart:
 
   deployment:
     create: true
-    replicas: 4
+    replicas: 1
 
   envConfig:
     APP: foo
@@ -16,7 +16,7 @@ microservice-chart:
 
   image:
     repository: ghcr.io/pagopa/devops-java-springboot-color
-    tag: 0.8.1
+    tag: beta-feat-base-image-aks-migration-selc
     pullPolicy: Always
 
   livenessProbe:
