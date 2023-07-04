@@ -11,7 +11,7 @@ RUN mvn clean package
 #
 # Docker RUNTIME
 #
-FROM adoptopenjdk/openjdk11:alpine-jre as runtime
+FROM ghcr.io/pagopa/docker-base-springboot-openjdk11:v1.0.1@sha256:bbbe948e91efa0a3e66d8f308047ec255f64898e7f9250bdb63985efd3a95dbf
 
 VOLUME /tmp
 WORKDIR /app
