@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/app/pagopa/2-8")
+@RequestMapping("/app/selc/2-8")
 public class AppController {
 
     @Value("${MY_APP_COLOR:}")
