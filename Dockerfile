@@ -17,7 +17,7 @@ VOLUME /tmp
 WORKDIR /app
 
 RUN mkdir /app/logs
-RUN chown spring:spring /app/logs
+run whoami
 
 COPY --from=buildtime /build/target/*.jar /app/app.jar
 # The agent is enabled at runtime via JAVA_TOOL_OPTIONS.
