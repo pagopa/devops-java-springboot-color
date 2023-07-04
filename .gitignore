@@ -5,7 +5,7 @@
 target/
 helm/charts
 logs/
-
+.idea
 # Compiled class file
 *.class
 
