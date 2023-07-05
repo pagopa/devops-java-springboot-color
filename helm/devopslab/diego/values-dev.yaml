@@ -42,9 +42,9 @@ microservice-chart:
       - 8080
 
   ingress:
-    create: false
+    create: true
     host: ""
-    path: /diego/color(/|$)(.*)
+    path: /upgrade/cstar28(/|$)(.*)
     rewriteTarget: /$2
     servicePort: 8080
 
