@@ -23,7 +23,7 @@ microservice-chart:
     httpGet:
       path: /status/live
       port: 8080
-    initialDelaySeconds: 60
+    initialDelaySeconds: 120
     failureThreshold: 6
     periodSeconds: 10
 
@@ -31,7 +31,7 @@ microservice-chart:
     httpGet:
       path: /status/ready
       port: 8080
-    initialDelaySeconds: 60
+    initialDelaySeconds: 120
     failureThreshold: 6
     periodSeconds: 10
 
