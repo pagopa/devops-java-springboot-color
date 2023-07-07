@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOGS" value="/app/logs" />
+    <property name="LOGS" value="logs" />
 
     <appender name="Console"
         class="ch.qos.logback.core.ConsoleAppender">
@@ -31,7 +31,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
-    
+
     <!-- LOG everything at INFO level -->
     <root level="info">
         <appender-ref ref="RollingFile" />
