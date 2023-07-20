@@ -47,6 +47,8 @@ microservice-chart:
     path: /upgrade/pagopa5(/|$)(.*)
     rewriteTarget: /$2
     servicePort: 8080
+    pathType: ImplementationSpecific
+
 
   serviceAccount:
     create: false
