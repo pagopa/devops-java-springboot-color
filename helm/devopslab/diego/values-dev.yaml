@@ -14,6 +14,9 @@ microservice-chart:
   envSecret:
     aks-api-url: dvopla-d-neu-dev01-aks-apiserver-url
 
+  fileConfig:
+    foo: bar
+
   image:
     repository: ghcr.io/pagopa/devops-java-springboot-color
     tag: beta-feat-base-image-aks-migration-cstar-2-8
