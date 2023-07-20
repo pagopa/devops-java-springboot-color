@@ -47,6 +47,7 @@ microservice-chart:
     path: /upgrade/cstar5(/|$)(.*)
     rewriteTarget: /$2
     servicePort: 8080
+    pathType: ImplementationSpecific
 
   serviceAccount:
     create: false
