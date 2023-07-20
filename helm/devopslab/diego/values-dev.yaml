@@ -84,7 +84,7 @@ microservice-chart:
       - type: cpu
         metadata:
           type: Utilization
-          value: "60"
+          value: "40"
 
   keyvault:
     name: "dvopla-d-diego-kv"
