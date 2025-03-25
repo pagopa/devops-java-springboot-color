@@ -6,14 +6,14 @@
 # ==========================================
 IMAGES=(
   "public.ecr.aws/docker/library/maven:3.9.3-amazoncorretto-17"
-  "public.ecr.aws/amazoncorretto/amazoncorretto:17.0.9-alpine"
+  # "public.ecr.aws/amazoncorretto/amazoncorretto:17.0.9-alpine" # alpine is not available
   "public.ecr.aws/docker/library/alpine:latest"
   "public.ecr.aws/docker/library/ubuntu:latest"
-  "public.ecr.aws/temurin/eclipse-temurin:17-jre"
+  "public.ecr.aws/docker/library/eclipse-temurin:17-jre"
   "public.ecr.aws/docker/library/node:18.13.0"
-  "public.ecr.aws/dotnet/runtime:7.0"
   "public.ecr.aws/docker/library/openjdk:17-jdk"
   "public.ecr.aws/docker/library/busybox:latest"
+  "public.ecr.aws/docker/library/debian:stable-20240701-slim"
 )
 
 # ==========================================
