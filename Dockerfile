@@ -1,12 +1,12 @@
 # Build stage
-FROM maven:3.9-amazoncorretto-21 AS builder
+FROM public.ecr.aws/docker/library/maven:3.9-amazoncorretto-21 AS builder
 
 WORKDIR /build
 COPY . .
 RUN --mount=type=cache,target=/root/.m2 mvn clean package -DskipTests
 
 # Runtime stage
-FROM amazoncorretto:21-alpine3.20
+FROM public.ecr.aws/docker/library/eclipse-temurin:21-alpine-3.20
 
 WORKDIR /app
 
@@ -33,13 +33,6 @@ ADD --chmod=644 https://github.com/microsoft/ApplicationInsights-Java/releases/d
 # Configure permissions
 RUN chown -R javauser:javauser /app
 USER javauser
-
-# Configure JVM options for containerized environment
-ENV JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=75.0 \
-    -XX:InitialRAMPercentage=50.0 \
-    -XX:+UseG1GC \
-    -Djava.security.egd=file:/dev/./urandom \
-    -Duser.timezone=Europe/Rome"
 
 # Application Insights configuration
 ENV APPLICATIONINSIGHTS_CONNECTION_STRING=""
