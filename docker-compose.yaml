@@ -2,22 +2,26 @@ version: "3.8"
 services:
   devops-java-springboot-color:
     build:
-      dockerfile: ./Dockerfile
       context: .
+      dockerfile: ./Dockerfile
     container_name: devops-java-springboot-color
     restart: always
     ports:
       - "8080:8080"
     volumes:
-      - ${PWD}/logs:/app/logs
+      - logs-volume:/app/logs
     environment:
       - LOGGING_LEVEL_ROOT=INFO
       - LOGGING_LEVEL_IT_PAGOPA_DEVOPS=DEBUG
       - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=INFO
       - MY_APP_COLOR=red
+      # - JAVA_TOOL_OPTIONS=-XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=50.0  -Djava.security.egd=file:/dev/./urandom -Duser.timezone=Europe/Rome
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 30s
       timeout: 3s
       retries: 3
       start_period: 30s
+
+volumes:
+  logs-volume:
