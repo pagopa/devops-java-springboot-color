@@ -46,7 +46,7 @@
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{ISO8601} %-5level [%t] %C{1}: %msg%n%throwable</Pattern>
         </encoder>
-        
+
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- Daily rollover with size limit -->
             <fileNamePattern>${LOGS}/archived/application-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
