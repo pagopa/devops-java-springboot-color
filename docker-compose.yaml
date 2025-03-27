@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    # image: ghcr.io/pagopa/devops-java-springboot-color:develop-3.0.0
     container_name: devops-java-springboot-color
     restart: always
     ports:
