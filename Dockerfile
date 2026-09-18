@@ -1,12 +1,12 @@
 # Build stage
-FROM public.ecr.aws/docker/library/maven:3.9-amazoncorretto-21 AS builder
+FROM public.ecr.aws/docker/library/maven:3.9-amazoncorretto-21@sha256:378d7b2d07742a557989e3494e5d6bf31ed599ff9f0a0b2f490ceaac48c91370 AS builder
 
 WORKDIR /build
 COPY . .
 RUN --mount=type=cache,target=/root/.m2 mvn clean package -DskipTests
 
 # Runtime stage
-FROM public.ecr.aws/docker/library/eclipse-temurin:21-alpine-3.20
+FROM public.ecr.aws/docker/library/eclipse-temurin:21-alpine-3.20@sha256:108c96f846c4f8affd722908f8392eb15d123b21395616dfbf8b2e6f48db44fa
 
 WORKDIR /app
 
